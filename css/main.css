@@ -875,8 +875,13 @@ a:hover {
  .hoverGrid a{
 color:#fff !important;
  }
-
-
+.logo .text a{
+  text-decoration: none;
+  color:#44444499 !important;
+}
+.logo-icon i{
+  font-size: 22px;
+}
 /* responsive css */
 @media (max-width: 768px) {
   .header {
