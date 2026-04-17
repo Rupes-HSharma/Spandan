@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discharge Note</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/main.css">
+
+<style>
+
+/* CARD */
+.form-card{
+  background:#fff;
+  border-radius:16px;
+  border:1px solid #eee;
+  padding:18px;
+  margin-bottom:15px;
+}
+
+/* HEADER */
+.form-header{
+  background: linear-gradient(135deg,#134e4a,#166534);
+  color:#fff;
+  padding:14px;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+/* INPUT */
+.form-control,.form-select{
+  border-radius:8px;
+  font-size:13px;
+}
+
+/* SMALL TEXT */
+.small-note{
+  font-size:12px;
+  color:#888;
+}
+
+</style>
+
+</head>
+
+<body class="dashboard-page">
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+
+  <div class="toggle-btn" onclick="toggleSidebar()">
+    <i class="bi bi-chevron-left"></i>
+  </div>
+
+  <div class="logo">
+    <div class="logo-icon">
+      <i class="bi bi-emoji-smile"></i>
+    </div>
+    <div class="text">
+      <strong>Spandan</strong><br>
+      <small>Neonatal Care System</small>
+    </div>
+  </div>
+
+  <div class="menu">
+    <a href="nurseDashboard.html" ><i class="bi bi-grid"></i><span class="text">Dashboard</span></a>
+    <a href="newbabyregistration.html"><i class="bi bi-person-plus"></i><span class="text">Register New Baby</span></a>
+    <a href="babyadmitted.html" class="active"><i class="bi bi-list"></i><span class="text">Admitted Babies</span></a>
+    <a href="dischargePatientArchive.html"><i class="bi bi-box-arrow-right"></i><span class="text">Discharged Babies</span></a>
+	<a href="videocallhistory.html"><i class="bi bi-camera-reels"></i><span class="text">Video Call History</span></a>
+	   <a href="analiticalReport.html"><i class="bi bi-bar-chart"></i><span class="text">Analytics</span></a>
+    <a href="securitySetting.html"><i class="bi bi-gear"></i><span class="text">Settings</span></a>
+  </div>
+
+  <div class="profile">
+    <img src="https://i.pravatar.cc/40" class="rounded-circle">
+    <div class="text">
+      <strong>Aryan Sharma</strong><br>
+      <small>Senior Pediatrician</small>
+    </div>
+  </div>
+
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h5 class="fw-bold mb-0">Discharge Note</h5>
+    <small class="text-muted">Neonatal discharge summary & follow-up plan</small>
+  </div>
+
+ 
+</div>
+
+<!-- MAIN -->
+<div class="main">
+<div class="content">
+<div class="custom-tabs mb-3">
+  <a class="tab-btn " data-tab="">Summary</a>
+  <a class="tab-btn active" data-tab="">Clinical Notes</a>
+  <a class="tab-btn" data-tab="">Treatment Orders</a>
+  <a class="tab-btn" data-tab="">Vitals</a>
+  <a class="tab-btn" data-tab="">Investigations</a>
+  <a class="tab-btn" data-tab="">Video Call History  </a>
+  <a class="tab-btn" data-tab="">Discharge</a>
+  
+  
+  <div class="d-flex gap-2 actionMonitring">
+    <a href="patientdetailssummary.html?tab=clinical" class="btn btn-light">Back</a>
+    <button class="btn btn-light">Edit Details</button>
+    <button class="btn btn-warning text-white">Save</button>
+  </div>
+</div>
+<div class="form-header">
+  <i class="bi bi-file-earmark-medical"></i> Discharge Note
+</div>
+
+<!-- ================= BASIC ================= -->
+<div class="form-card">
+<h6>Infant & Family Details</h6>
+
+<div class="row g-2">
+
+<div class="col-md-4"><input class="form-control" placeholder="NBSU Reg No"></div>
+<div class="col-md-4"><input class="form-control" placeholder="Baby of (Mother)"></div>
+<div class="col-md-4"><select class="form-select"><option>Sex</option></select></div>
+
+<div class="col-md-4"><input type="date" class="form-control"></div>
+<div class="col-md-4"><input type="date" class="form-control"></div>
+<div class="col-md-4"><input class="form-control" placeholder="Gestational age"></div>
+
+<div class="col-md-4"><input class="form-control" placeholder="Birth weight"></div>
+<div class="col-md-4"><input class="form-control" placeholder="Discharge weight"></div>
+<div class="col-md-4"><input class="form-control" placeholder="Doctor name"></div>
+
+</div>
+</div>
+
+<!-- ================= DIAGNOSIS ================= -->
+<div class="form-card">
+<h6>Final / Principal Diagnosis</h6>
+<textarea class="form-control" rows="2"></textarea>
+
+<h6 class="mt-3">Hospital Course & Clinical Summary</h6>
+<textarea class="form-control" rows="3"></textarea>
+
+<h6 class="mt-3">Key Investigations</h6>
+<textarea class="form-control" rows="2"></textarea>
+</div>
+
+<!-- ================= MEDICATION ================= -->
+<div class="form-card">
+
+<div class="d-flex justify-content-between">
+<h6>Medications Prescribed</h6>
+<button class="btn btn-success btn-sm">+ Add medication</button>
+</div>
+
+<table class="table mt-2">
+<tr>
+<th>Drug</th>
+<th>Route</th>
+<th>Frequency</th>
+<th>Duration</th>
+<th></th>
+</tr>
+
+<tr>
+<td><input class="form-control"></td>
+<td><input class="form-control"></td>
+<td><input class="form-control"></td>
+<td><input class="form-control"></td>
+<td><i class="bi bi-trash text-danger"></i></td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- ================= FEEDING ================= -->
+<div class="form-card">
+<div class="row g-2">
+
+<div class="col-md-6">
+<label>Feeding at discharge</label>
+<input class="form-control">
+</div>
+
+<div class="col-md-6">
+<label>Additional supplements</label>
+<input class="form-control">
+</div>
+
+<div class="col-md-12">
+<label>Special Instructions</label>
+<textarea class="form-control"></textarea>
+</div>
+
+</div>
+</div>
+
+<!-- ================= IMMUNIZATION ================= -->
+<div class="form-card">
+<h6>Immunizations</h6>
+
+<div class="row g-2">
+
+<div class="col-md-3"><input type="checkbox"> BCG</div>
+<div class="col-md-3"><input type="checkbox"> OPV</div>
+<div class="col-md-3"><input type="checkbox"> Hepatitis B</div>
+<div class="col-md-3"><input type="checkbox"> Rotavirus</div>
+
+<div class="col-md-6"><input class="form-control" placeholder="Hearing screening"></div>
+<div class="col-md-6"><input class="form-control" placeholder="ROP screening"></div>
+
+</div>
+</div>
+
+<!-- ================= FOLLOW UP ================= -->
+<div class="form-card">
+<h6>Follow-up & Referrals</h6>
+<textarea class="form-control"></textarea>
+</div>
+
+<!-- ================= EDUCATION ================= -->
+<div class="form-card">
+<h6>Parental Education & Counselling</h6>
+<textarea class="form-control"></textarea>
+</div>
+
+<!-- ================= OUTCOME ================= -->
+<div class="form-card">
+<div class="row g-2">
+
+<div class="col-md-6">
+<label>Discharge Outcome</label>
+<select class="form-select">
+<option>Stable</option>
+</select>
+</div>
+
+<div class="col-md-6">
+<label>Final Weight</label>
+<input class="form-control">
+</div>
+
+</div>
+</div>
+
+<!-- ================= DOCTOR ================= -->
+<div class="form-card">
+<div class="row g-2">
+
+<div class="col-md-6">
+<label>Doctor Name</label>
+<input class="form-control">
+</div>
+
+<div class="col-md-6">
+<label>Consultant</label>
+<input class="form-control">
+</div>
+
+<div class="col-md-12">
+<label>Signature</label>
+<input class="form-control">
+</div>
+
+</div>
+</div>
+
+<!-- ================= CHECKLIST ================= -->
+<div class="form-card">
+<h6>Discharge Checklist</h6>
+
+<div class="row">
+
+<div class="col-md-4"><input type="checkbox"> Summary given</div>
+<div class="col-md-4"><input type="checkbox"> Follow-up scheduled</div>
+<div class="col-md-4"><input type="checkbox"> Vaccination updated</div>
+
+<div class="col-md-4"><input type="checkbox"> Growth chart</div>
+<div class="col-md-4"><input type="checkbox"> Breastfeeding assessed</div>
+<div class="col-md-4"><input type="checkbox"> Medication explained</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+<script>
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("collapsed");
+}
+</script>
+</body>
+</html>

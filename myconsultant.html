@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Consultent</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/main.css">
+
+<style>
+
+/* ===== VIDEO PAGE CSS ONLY ===== */
+
+.request-card, .consult-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 15px;
+  border: 1px solid #eee;
+}
+
+.request-item {
+  border-bottom: 1px solid #f1f1f1;
+  padding: 12px 0;
+}
+
+.request-item:last-child {
+  border-bottom: none;
+}
+
+.btn-accept {
+  background: #f25c05;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.btn-join {
+  background: #0f9d8a;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.stat-box {
+  background: #f6f8fb;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.badge-top {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
+
+.badge-critical {
+  background: #fdecec;
+  color: #e53935;
+}
+
+.badge-stable {
+  background: #e6f7ef;
+  color: #16a34a;
+}
+
+</style>
+
+</head>
+
+<body class="dashboard-page">
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <div class="toggle-btn" onclick="toggleSidebar()">
+    <i class="bi bi-chevron-left"></i>
+  </div>
+
+  <div class="logo">
+    <div class="logo-icon">
+      <i class="bi bi-emoji-smile"></i>
+    </div>
+    <div class="text">
+      <strong>Spandan</strong><br>
+      <small>Neonatal Care System</small>
+    </div>
+  </div>
+
+  <div class="menu">
+    <a href="nurseDashboard.html" class="active"><i class="bi bi-grid"></i><span class="text">Dashboard</span></a>
+    <a href="newbabyregistration.html"><i class="bi bi-person-plus"></i><span class="text">Register New Baby</span></a>
+    <a href="babyadmitted.html"><i class="bi bi-list"></i><span class="text">Admitted Babies</span></a>
+    <a href="dischargePatientArchive.html"><i class="bi bi-box-arrow-right"></i><span class="text">Discharged Babies</span></a>
+	<a href="videocallhistory.html"><i class="bi bi-camera-reels"></i><span class="text">Video Call History</span></a>
+	   <a href="analiticalReport.html"><i class="bi bi-bar-chart"></i><span class="text">Analytics</span></a>
+    <a href="securitySetting.html"><i class="bi bi-gear"></i><span class="text">Settings</span></a>
+  </div>
+
+  <div class="profile">
+    <img src="https://i.pravatar.cc/40" class="rounded-circle">
+    <div class="text">
+      <strong>Aryan Sharma</strong><br>
+      <small>Senior Pediatrician</small>
+    </div>
+  </div>
+
+</div>
+
+<!-- Header -->
+<div class="header">
+  <div>
+    <h4 class="fw-bold mb-0">Admitted Babies</h4>
+    <small class="text-muted">Manage and monitor all currently admitted neonatal patients.</small>
+  </div>
+
+  <div class="d-flex gap-3 align-items-center">
+    <input class="form-control" placeholder="Quick search baby ID..." style="width:200px;">
+    <i class="bi bi-bell fs-5"></i>
+    <img src="https://i.pravatar.cc/40" class="rounded-circle" width="35">
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+<div class="content">
+
+<!-- TOP -->
+<div class="d-flex justify-content-between mb-3">
+  <h5 class="fw-semibold">
+    <i class="bi bi-graph-up-arrow me-1"></i> My Consultations
+  </h5>
+
+  <div class="d-flex gap-2">
+    <button class="btn btn-success btn-sm">📹 Video Call History</button>
+    <button class="btn btn-light btn-sm">Filter</button>
+  </div>
+</div>
+
+<div class="row g-3">
+
+<!-- LEFT -->
+<div class="col-lg-4">
+
+<div class="request-card">
+
+<div class="d-flex justify-content-between">
+<h6>Incoming Requests</h6>
+<span class="badge bg-danger">3 NEW</span>
+</div>
+
+<!-- ITEM -->
+<div class="request-item">
+<b>Baby Boy Arlo</b><br>
+<small>City General Hospital</small>
+
+<div class="d-flex justify-content-between mt-1">
+  <small><i class="bi bi-activity"></i> Resp. Distress</small>
+  <small><i class="bi bi-speedometer2"></i> 1.2 kg</small>
+</div>
+
+<div class="d-flex justify-content-between">
+  <small class="text-muted"><i class="bi bi-clock"></i> 10:15 AM</small>
+  <small class="text-muted">NICU Request</small>
+</div>
+
+<div class="d-flex gap-2 mt-2">
+<button class="btn btn-accept btn-sm w-50">Accept</button>
+<button class="btn btn-light btn-sm w-50">Decline</button>
+</div>
+</div>
+
+<!-- ITEM -->
+<div class="request-item">
+<b>Baby Girl Maya</b><br>
+<small>St. Mary's Pediatric</small>
+
+<div class="d-flex justify-content-between mt-1">
+  <small>Preterm Care</small>
+  <small>0.85 kg</small>
+</div>
+
+<div class="d-flex justify-content-between">
+  <small class="text-muted">10:42 AM</small>
+  <small class="text-muted">NICU Request</small>
+</div>
+
+<div class="d-flex gap-2 mt-2">
+<button class="btn btn-accept btn-sm w-50">Accept</button>
+<button class="btn btn-light btn-sm w-50">Decline</button>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- RIGHT -->
+<div class="col-lg-8">
+
+<h6>My Active Consultations</h6>
+
+<div class="row g-3">
+
+<!-- CARD -->
+<div class="col-md-6">
+<div class="consult-card position-relative">
+
+<span class="badge-top badge-critical">CRITICAL</span>
+
+<b>Baby Boy Smith</b><br>
+<small>NICU - BED 04</small>
+
+<div class="d-flex justify-content-between mt-1">
+  <small class="text-muted">Connected • 1h 22m</small>
+  <small class="text-muted">Live</small>
+</div>
+
+<div class="row mt-2">
+<div class="col stat-box">182<br><small>HR</small></div>
+<div class="col stat-box">88%<br><small>SpO2</small></div>
+<div class="col stat-box">36.2<br><small>Temp</small></div>
+</div>
+
+<div class="d-flex gap-2 mt-3">
+<button class="btn btn-accept w-100">Join Video</button>
+<button class="btn btn-light"><i class="bi bi-camera-video"></i></button>
+<button class="btn btn-light"><i class="bi bi-graph-up"></i></button>
+</div>
+
+</div>
+</div>
+
+<!-- CARD -->
+<div class="col-md-6">
+<div class="consult-card position-relative">
+
+<span class="badge-top badge-stable">STABLE</span>
+
+<b>Baby Jace</b><br>
+<small>NICU - BED 08</small>
+
+<div class="d-flex justify-content-between mt-1">
+  <small class="text-muted">Connected • 50m</small>
+  <small class="text-muted">Live</small>
+</div>
+
+<div class="row mt-2">
+<div class="col stat-box">138<br><small>HR</small></div>
+<div class="col stat-box">98%<br><small>SpO2</small></div>
+<div class="col stat-box">36.6<br><small>Temp</small></div>
+</div>
+
+<div class="d-flex gap-2 mt-3">
+<button class="btn btn-join w-100">Join Video</button>
+<button class="btn btn-light"><i class="bi bi-camera-video"></i></button>
+<button class="btn btn-light"><i class="bi bi-graph-up"></i></button>
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+<script>
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("collapsed");
+}
+</script>
+</body>
+</html>

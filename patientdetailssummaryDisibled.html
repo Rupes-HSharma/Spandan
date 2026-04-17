@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Patient Full System</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+<style>
+.tab-content{display:none}
+.tab-content.active{display:block}
+/* VIDEO CARD */
+.video-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+/* VIDEO BOX */
+.video-box {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.video-box img {
+  height: 300px;
+  object-fit: cover;
+}
+
+/* CONTROLS */
+.video-controls {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #fff;
+}
+
+/* TAG */
+.video-tag {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #fff;
+  font-size: 12px;
+}
+
+/* RIGHT PANEL */
+.video-info {
+  background: #f9fafb;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* RECORD CARD */
+.record-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.record-card img {
+  height: 180px;
+  object-fit: cover;
+}
+
+/* BUTTON */
+.btn-orange {
+  background: #f97316;
+  color: #fff;
+  border: none;
+}
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+
+/* Upload Box */
+.upload-box {
+  border: 2px dashed #dee2e6;
+  border-radius: 12px;
+  padding: 25px;
+  background: #fff;
+}
+
+/* Icon */
+.icon-circle {
+  width: 45px;
+  height: 45px;
+  background: #ffe9df;
+  color: #ff6a2f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+/* Orange Button */
+.btn-orange {
+  background: #ff6a2f;
+  color: #fff;
+  border: none;
+}
+
+.btn-orange:hover {
+  background: #e55a24;
+}
+
+/* Summary Card */
+.summary-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  height: 100%;
+}
+
+/* Table tweaks */
+.table thead {
+  background: #f8f9fa;
+  font-size: 13px;
+}
+/* Pagination bar style */
+.border-top {
+  border-color: #e9ecef !important;
+}
+
+/* Active button */
+.btn.active {
+  background-color: #e9ecef;
+  font-weight: 500;
+}
+#summary, #vitals, #investigation, #video, #discharge{
+      pointer-events: none;
+}
+</style>
+</head>
+
+<body class="dashboard-page">
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+
+  <div class="toggle-btn" onclick="toggleSidebar()">
+    <i class="bi bi-chevron-left"></i>
+  </div>
+
+  <div class="logo">
+    <div class="logo-icon">
+      <i class="bi bi-emoji-smile"></i>
+    </div>
+    <div class="text">
+      <strong>Spandan</strong><br>
+      <small>Neonatal Care System</small>
+    </div>
+  </div>
+
+  <div class="menu">
+    <a href="nurseDashboard.html" class=""><i class="bi bi-grid"></i><span class="text">Dashboard</span></a>
+    <a href="newbabyregistration.html"><i class="bi bi-person-plus"></i><span class="text">Register New Baby</span></a>
+    <a href="babyadmitted.html" ><i class="bi bi-list"></i><span class="text">Admitted Babies</span></a>
+    <a href="dischargePatientArchive.html" class="active"><i class="bi bi-box-arrow-right"></i><span class="text">Discharged Babies</span></a>
+	<a href="videocallhistory.html"><i class="bi bi-camera-reels"></i><span class="text">Video Call History</span></a>
+	   <a href="analiticalReport.html"><i class="bi bi-bar-chart"></i><span class="text">Analytics</span></a>
+    <a href="securitySetting.html"><i class="bi bi-gear"></i><span class="text">Settings</span></a>
+  </div>
+
+  <div class="profile">
+    <img src="https://i.pravatar.cc/40" class="rounded-circle">
+    <div class="text">
+      <strong>Aryan Sharma</strong><br>
+      <small>Senior Pediatrician</small>
+    </div>
+  </div>
+
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="d-flex gap-3 align-items-center">
+    <img src="https://i.pravatar.cc/50" class="rounded-circle">
+    <div>
+      <h5 class="mb-0">B/O Anjali Sharma1 <span class="badge bg-danger">CRITICAL</span></h5>
+      <small>ID:4502 | Bed:04 | Male | 2 Days</small>
+    </div>
+  </div>
+ <div class="d-flex align-items-center gap-3">
+    <div class="icon-btn">
+      <button class="btn btn-success p-2">Dicharged on - 23 Oct 2025</i>
+    </div>
+     
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+<div class="content">
+
+<!-- ================= TABS ================= -->
+<!-- ================= TABS ================= -->
+<div class="custom-tabs mb-3">
+  <a class="tab-btn active" data-tab="summary">Summary</a>
+  <a class="tab-btn" data-tab="clinical">Clinical Notes</a>
+  <a class="tab-btn" data-tab="treatment">Treatment Orders</a>
+  <a class="tab-btn" data-tab="vitals">Vitals</a>
+  <a class="tab-btn" data-tab="investigation">Investigations</a>
+  <a class="tab-btn" data-tab="video">Video Call History  </a>
+  <a class="tab-btn" data-tab="discharge">Discharge</a>
+</div>
+
+<!-- ================= SUMMARY ================= -->
+<div id="summary" class="tab-content active">
+<div class="row g-3">
+
+<div class="col-lg-8">
+
+<div class="custom-card">
+<h6>Birth Details</h6>
+<div class="row text-center">
+<div class="col"><small>Gestation</small><h6>28 Weeks + 4 Days</h6></div>
+<div class="col"><small>Birth Weight</small><h6>1,120g</h6></div>
+<div class="col"><small>Delivery Mode</small><h6>Emergency C-Section</h6></div>
+<div class="col"><small>Apgar Score</small><h6>6/1, 8/5</h6></div>
+</div>
+</div>
+
+<div class="custom-card">
+<h6>Diagnosis</h6>
+<span class="tag">Extreme Preterm</span>
+<span class="tag">Respiratory Distress Syndrome</span>
+<span class="tag">Early Onset Sepsis</span>
+<span class="tag">Very Low Birth Weight</span>
+</div>
+
+<div class="custom-card">
+<h6>Ventilation & Oxygen Support <span class="badge bg-success">ACTIVE</span></h6>
+<div class="row text-center">
+<div class="col"><small>Mode</small><h6>CPAP</h6></div>
+<div class="col"><small>FiO2</small><h6>35%</h6></div>
+<div class="col"><small>PEEP</small><h6>5 cmH2O</h6></div>
+<div class="col"><small>Flow</small><h6>6 L/min</h6></div>
+</div>
+</div>
+
+<div class="custom-card">
+<h6>Latest Vitals (Snapshot)</h6>
+<div class="row text-center">
+<div class="col"><h6>80</h6><small>HR</small></div>
+<div class="col"><h6>96%</h6><small>SpO2</small></div>
+<div class="col"><h6>64</h6><small>RR</small></div>
+<div class="col"><h6>42</h6><small>Mean BP</small></div>
+<div class="col"><h6>36.8</h6><small>Temp</small></div>
+</div>
+</div>
+
+</div>
+
+<div class="col-lg-4">
+<div class="custom-card">
+<h6>Current Status</h6>
+
+<div class="alert alert-danger">
+Condition remains critical but stable on support. Monitoring for sepsis.
+</div>
+
+<p><b>Activity:</b> Lethargic</p>
+<p><b>Feeding:</b> <span class="text-warning">NPO</span></p>
+<p><b>IV Fluids:</b> Trophic Feed/D10W</p>
+<p><b>Antibiotics:</b> Day 2 (Inj. Ampi/Gen)</p>
+<p><b>Temp Control:</b> Radiant Warmer (36.5°C)</p>
+
+<button class="btn btn-outline-danger w-100">View Detailed History</button>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ================= CLINICAL ================= -->
+<div id="clinical" class="tab-content">
+
+<div class="row g-3 mb-0">
+
+<div class="col-md-6">
+<div class="custom-card disibled">
+<h6>Digital Form Templates</h6>
+
+<div class="form-check  p-0 gap-4">
+  <a href="monotoringSheet.html" class="btn btn-light mb-2">Monitoring Sheet</a>
+<a href="nbsuDischarge.html" class="btn btn-light  mb-2">Discharge Card</a>
+<a href="dischargeNote.html" class="btn btn-light  mb-2">Discharge Note</a>
+<a href="NewbornStabilization.html" class="btn btn-light  mb-2">Neonatal Case Record</a>
+<a href="childCareneotal.html"class="btn btn-light ">NICU Treatment & Clinical Record</a>
+</div>
+
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="custom-card disibled text-center" style="position: relative;">
+
+<h6>Upload Manual Record <p class="text-black-50">PDF / JPG / PNG</p></h6>
+
+
+
+
+<div style="position: relative; ">
+  <input type="file" class="form-control mb-2">
+  <div style="position: absolute; right:10px; top:7px;">
+    <button class="btn btn-light">Browse Files</button>
+<button class="btn btn-light">Scan</button>
+  </div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="custom-card mt-0">
+
+<div class="d-flex disibled justify-content-between mb-2">
+<h6>Documentation History</h6>
+  <input class="form-control w-auto p-2" placeholder="Search documents... ">
+</div>
+
+<table class="table">
+<thead>
+<tr>
+<th>Type</th>
+<th>Document Name</th>
+<th>Saved/Uploaded</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Digital</td>
+<td>NBSU Discharge Summary Card</td>
+<td>Oct 24, 2023</td>
+<td><span class="badge bg-primary disibled">Completed</span></td>
+<td>View | Edit</td>
+</tr>
+
+<tr>
+<td>Manual</td>
+<td>Radiology Report (Chest X-Ray)</td>
+<td>Oct 23, 2023</td>
+<td><span class="badge bg-secondary disibled">Uploaded</span></td>
+<td>View PDF | Replace</td>
+</tr>
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================= TREATMENT ================= -->
+<div id="treatment" class="tab-content">
+
+<div class="custom-card">
+
+<div class="d-flex justify-content-between mb-2">
+<h6>Treatment Continuation Sheet</h6>
+<button class="btn btn-success">+ Add New</button>
+</div>
+
+<div class="row g-2 mb-3">
+
+<div class="col-md-4">
+<label>NBSU Reg No</label>
+<input class="form-control">
+</div>
+
+<div class="col-md-4">
+<label>Date of Admission</label>
+<input type="date" class="form-control">
+</div>
+
+<div class="col-md-4">
+<label>Baby of (Mother Name)</label>
+<input class="form-control">
+</div>
+
+<div class="col-md-4">
+<label>Sex</label>
+<select class="form-select"><option>Male</option></select>
+</div>
+
+<div class="col-md-4">
+<label>Birth Weight</label>
+<input class="form-control">
+</div>
+
+<div class="col-md-4">
+<label>Doctor Incharge</label>
+<input class="form-control">
+</div>
+
+</div>
+
+<h6>Daily Treatment Log</h6>
+
+<table class="table">
+<tr>
+<th>Date</th>
+<th>Weight</th>
+<th>PND</th>
+<th>Oxygen</th>
+<th>Drugs</th>
+<th>Fluids</th>
+<th>Feeding</th>
+<th>Investigations</th>
+<th>Planning</th>
+</tr>
+
+<tr>
+<td><input type="date" class="form-control"></td>
+<td><input class="form-control"></td>
+<td><input class="form-control"></td>
+<td><input class="form-control"></td>
+<td><input class="form-control"></td>
+<td><input class="form-control"></td>
+<td><input class="form-control"></td>
+<td><input class="form-control"></td>
+<td><input class="form-control"></td>
+</tr>
+</table>
+
+</div>
+
+</div>
+
+<!-- ================= VITALS ================= -->
+<div id="vitals" class="tab-content">
+
+<div class="custom-card">
+
+<div class="d-flex justify-content-between mb-2">
+<h6>Current Vitals Input</h6>
+<button class="btn btn-outline-secondary">Manage Fields</button>
+</div>
+
+<div class="row g-2">
+
+<div class="col-md-2"><label>Heart Rate</label><input class="form-control"></div>
+<div class="col-md-2"><label>Resp Rate</label><input class="form-control"></div>
+<div class="col-md-2"><label>SpO2</label><input class="form-control"></div>
+<div class="col-md-2"><label>Temperature</label><input class="form-control"></div>
+<div class="col-md-2"><label>Blood Sugar</label><input class="form-control"></div>
+<div class="col-md-2"><label>Weight</label><input class="form-control"></div>
+
+</div>
+
+<button class="btn login-btn mt-3">Save Vitals</button>
+
+</div>
+
+<div class="custom-card mt-3">
+
+<h6>Vitals History</h6>
+
+<table class="table">
+<tr><th>Time</th><th>HR</th><th>SpO2</th><th>Temp</th></tr>
+<tr><td>14:30</td><td>80</td><td>98%</td><td>36.9</td></tr>
+<tr><td>12:15</td><td>145</td><td>89%</td><td>37.1</td></tr>
+</table>
+
+</div>
+
+</div>
+
+<!-- ================= INVESTIGATION ================= -->
+<div id="investigation" class="tab-content">
+
+  <div class="row g-3">
+
+    <!-- Upload Photo -->
+    <div class="col-md-4">
+      <div class="upload-box text-center">
+        <div class="icon-circle mb-2">📷</div>
+        <h6>Upload Photo</h6>
+        <small class="text-muted d-block mb-3">
+          Scan or snap test results (JPG, PNG)
+        </small>
+        <button class="btn btn-orange btn-sm">Select Images</button>
+      </div>
+    </div>
+
+    <!-- Upload PDF -->
+    <div class="col-md-4">
+      <div class="upload-box text-center">
+        <div class="icon-circle mb-2">📄</div>
+        <h6>Upload PDF</h6>
+        <small class="text-muted d-block mb-3">
+          Direct lab reports or scanned docs
+        </small>
+        <button class="btn btn-orange btn-sm">Select Documents</button>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="col-md-4">
+      <div class="summary-card">
+
+        <div class="d-flex justify-content-between mb-2">
+          <span>Total Tests</span>
+          <strong>24</strong>
+        </div>
+
+        <div class="d-flex justify-content-between mb-2">
+          <span>Abnormal Values</span>
+          <strong class="text-danger">03</strong>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+          <span>Last Lab Visit</span>
+          <strong>22 Oct, 10:30 AM</strong>
+        </div>
+
+        <button class="btn btn-orange w-100">Print All Reports</button>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Table -->
+  <div class="card mt-3 p-3">
+
+    <div class="d-flex justify-content-between mb-3">
+      <h6 class="mb-0">Recent Test Results</h6>
+      <div>
+        <button class="btn btn-light btn-sm">Filter</button>
+        <button class="btn btn-light btn-sm">Export</button>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>Date & Time</th>
+            <th>Test Name</th>
+            <th>Value</th>
+            <th>Reference Range</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>24 Oct, 2023</td>
+            <td>Serum Bilirubin</td>
+            <td><span class="badge bg-light text-dark">12.4 mg/dL</span></td>
+            <td>5–15</td>
+            <td> <a target="_blank" href="images/Serum_Bilirubin_Report.pdf">👁️</a>  </td>
+          </tr>
+
+          <tr>
+            <td class="text-danger">23 Oct, 2023</td>
+            <td class="text-danger">CRP</td>
+            <td><span class="badge bg-danger-subtle text-danger">18.2 mg/L</span></td>
+            <td>0–6</td>
+            <td> <a href="#">👁️</a></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+<div class="d-flex justify-content-between align-items-center mt-3 border-top pt-3">
+
+  <!-- Left Text -->
+  <small class="text-muted">
+    Showing 2 of 24 results
+  </small>
+
+  <!-- Right Buttons -->
+  <div>
+    <button class="btn btn-light btn-sm me-2">Previous</button>
+    <button class="btn btn-light btn-sm active">Next</button>
+  </div>
+
+</div>
+  </div>
+  
+  <!-- Report Preview Section -->
+<!--<div class="card mt-3 p-3">
+
+  <h6 class="mb-3">Report Previews</h6>
+
+  <div class="d-flex gap-3 flex-wrap">
+
+ 
+    <div class="preview-box">
+      <img src="https://via.placeholder.com/120x120?text=Report+1" class="img-fluid rounded">
+    </div>
+
+   
+    <div class="preview-box">
+      <img src="https://via.placeholder.com/120x120?text=Report+2" class="img-fluid rounded">
+    </div>
+
+ 
+    <div class="preview-box add-box d-flex align-items-center justify-content-center">
+      <div class="text-center">
+        <div class="fs-4">+</div>
+        <small>Add New Scan</small>
+      </div>
+    </div>
+
+  </div>
+
+</div>-->
+
+</div>
+
+<!-- ================= VIDEO ================= -->
+<div id="video" class="tab-content">
+
+<div class="content">
+ 
+ <div class="video-wrapper">
+
+ 
+
+<!-- LATEST VIDEO -->
+<div class="video-card">
+
+<div class="row">
+
+<!-- LEFT VIDEO -->
+<div class="col-lg-8">
+
+<h6 class="mb-2">Latest Saved Video Call</h6>
+<small class="text-muted">BB-8921 • NICU Bed 04</small>
+
+<div class="video-box mt-2">
+<img src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b" class="w-100">
+
+<div class="video-controls">
+▶ 04:12 / 12:45
+</div>
+
+<div class="video-tag">
+SESSION ID: BB-8921-X
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT INFO -->
+<div class="col-lg-4">
+
+<div class="video-info">
+
+<h6>B/O Anjali Sharma</h6>
+<small>BB-8921 • Oct 24, 2023 at 09:45 AM</small>
+
+<p class="mt-2"><b>Participants</b><br>
+Dr. S. Kapoor, Nurse Anita</p>
+
+<button class="btn btn-orange w-100 mb-2">Download</button>
+<button class="btn btn-outline-secondary w-100">View Case Sheet</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ALL RECORDINGS -->
+<div class="mt-4">
+
+<div class="d-flex justify-content-between align-items-center">
+
+<div>
+<h5>All Video Call Recordings</h5>
+<small class="text-muted">Access your video call session history and clinical documentation.</small>
+</div>
+
+<div class="d-flex gap-2">
+<button class="btn btn-light">Filter</button>
+<button class="btn btn-light">Newest First</button>
+</div>
+
+</div>
+
+<!-- CARDS -->
+<div class="row mt-3 g-3">
+
+<!-- CARD 1 -->
+<div class="col-lg-4">
+<div class="record-card">
+
+<img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b" class="w-100">
+
+<div class="p-3">
+
+<h6>B/O Anjali Sharma <span class="badge bg-danger">CRITICAL</span></h6>
+<small>BB-8921 • Oct 24, 2023 at 09:45 AM</small>
+
+<p class="mt-2"><b>Participants</b><br>
+Dr. S. Kapoor, Nurse Anita</p>
+
+<div class="d-flex gap-2">
+<button class="btn btn-light w-50">Download</button>
+<button class="btn btn-light w-50">View Case sheet</button>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- CARD 2 -->
+<div class="col-lg-4">
+<div class="record-card">
+
+<img src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b" class="w-100">
+
+<div class="p-3">
+
+<h6>B/O Anjali Sharma <span class="badge bg-success">STABLE</span></h6>
+<small>BB-8921 • Oct 23, 2023 at 02:15 PM</small>
+
+<p class="mt-2"><b>Participants</b><br>
+Dr. Elena Ross, Nurse Jacob</p>
+
+<div class="d-flex gap-2">
+<button class="btn btn-light w-50">Download</button>
+<button class="btn btn-light w-50">View Case sheet</button>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- CARD 3 -->
+<div class="col-lg-4">
+<div class="record-card">
+
+<img src="https://images.unsplash.com/photo-1579154204601-01588f351e67" class="w-100">
+
+<div class="p-3">
+
+<h6>B/O Anjali Sharma <span class="badge bg-secondary">STABLE</span></h6>
+<small>BB-8921 • Oct 22, 2023 at 11:30 AM</small>
+
+<p class="mt-2"><b>Participants</b><br>
+Dr. M. Chawla, Nurse Sara</p>
+
+<div class="d-flex gap-2">
+<button class="btn btn-light w-50">Download</button>
+<button class="btn btn-light w-50">View Case sheet</button>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+ 
+
+</div>
+
+</div>
+
+<!-- ================= DISCHARGE ================= -->
+<div id="discharge" class="tab-content">
+
+<!-- HEADER ACTION -->
+<div class="d-flex justify-content-end gap-2 mb-3">
+   <button class="btn btn-secondary">Print</button>
+ 
+</div>
+
+<!-- 1 TYPE OF DISCHARGE -->
+<div class="custom-card">
+  <h6>1. Type of Discharge</h6>
+
+  <div class="d-flex flex-wrap align-items-center gap-3">
+
+  <div class="form-check d-flex align-items-center gap-2">
+    <input class="form-check-input" type="radio" name="dischargeType" id="routine" checked>
+    <label class="form-check-label mb-0" for="routine">
+      Routine Discharge
+    </label>
+  </div>
+
+  <div class="form-check d-flex align-items-center gap-2">
+    <input class="form-check-input" type="radio" name="dischargeType" id="lama">
+    <label class="form-check-label mb-0" for="lama">
+      LAMA
+    </label>
+  </div>
+
+  <div class="form-check d-flex align-items-center gap-2">
+    <input class="form-check-input" type="radio" name="dischargeType" id="dor">
+    <label class="form-check-label mb-0" for="dor">
+      DOR
+    </label>
+  </div>
+
+  <div class="form-check d-flex align-items-center gap-2">
+    <input class="form-check-input" type="radio" name="dischargeType" id="transfer">
+    <label class="form-check-label mb-0" for="transfer">
+      Transfer Facility
+    </label>
+  </div>
+
+  <div class="form-check d-flex align-items-center gap-2">
+    <input class="form-check-input" type="radio" name="dischargeType" id="death">
+    <label class="form-check-label mb-0" for="death">
+      Death
+    </label>
+  </div>
+
+</div>
+</div>
+
+<!-- 2 CURRENT STATUS -->
+<div class="custom-card">
+<h6 class="step-title">
+  <span class="step-badge">2</span>
+  Current Clinical Status
+</h6>
+
+<label class="label-text">Overall Condition</label>
+<div class="pill-group">
+  <div class="pill active">Stable</div>
+  <div class="pill">Unstable</div>
+  <div class="pill">Critical</div>
+</div>
+
+<label class="label-text mt-2">Vitals Status</label>
+<div class="pill-group">
+  <div class="pill active">Stable</div>
+  <div class="pill">Not Stable</div>
+</div>
+
+<label class="label-text mt-2">Feeding Status</label>
+<div class="pill-group">
+  <div class="pill active">Feeding Well</div>
+  <div class="pill">Poor Feeding</div>
+  <div class="pill">Tube Feeding</div>
+</div>
+
+<label class="label-text mt-2">Respiratory Support</label>
+<div class="pill-group">
+  <div class="pill active">Room Air</div>
+  <div class="pill">Oxygen</div>
+  <div class="pill">CPAP</div>
+  <div class="pill">Ventilator</div>
+</div>
+
+</div>
+
+<!-- 3 DIAGNOSIS -->
+<div class="custom-card">
+  <h6>3. Diagnosis</h6>
+
+  <label>Primary Diagnosis</label>
+  <input class="form-control mb-2" placeholder="e.g. Prematurity, VLBW">
+
+  <label>Secondary Diagnosis</label>
+  <input class="form-control" placeholder="Add secondary diagnosis">
+
+</div>
+
+<!-- 4 MEDICATION -->
+<div class="custom-card">
+  <h6>4. Discharge Medications</h6>
+
+  <label>Medication Plan Status</label>
+
+  <div class="d-flex gap-2">
+    <button class="btn btn-outline-success">GIVEN</button>
+    <button class="btn btn-outline-secondary">NOT REQUIRED</button>
+  </div>
+
+  <small class="text-muted d-block mt-2">
+    Ensure prescriptions are printed and signed.
+  </small>
+
+</div>
+
+<!-- 5 FOLLOW UP -->
+<div class="custom-card">
+  <h6>5. Follow-Up Required</h6>
+
+  <div class="d-flex gap-3 mb-3">
+    <label><input type="radio" name="followup" checked> YES</label>
+    <label><input type="radio" name="followup"> NO</label>
+  </div>
+
+<div class="row mb-3">
+
+  <div class="col-md-2">
+    <label class="form-label">Follow-up Date</label>
+    <input type="date" class="form-control">
+  </div>
+
+  <div class="col-md-2">
+    <label class="form-label">Department / Clinic</label>
+    <input type="text" class="form-control" placeholder="e.g. Pediatric OPD">
+  </div>
+
+</div>
+
+</div>
+
+<!-- 6 INSTRUCTION -->
+<div class="custom-card">
+  <h6>6. Parent Instruction Given</h6>
+
+  <p class="text-muted">
+    Feeding, hygiene, emergency warning signs explained.
+  </p>
+
+  <div class="d-flex gap-3">
+    <label><input type="radio" name="instruction" checked> YES</label>
+    <label><input type="radio" name="instruction"> NO</label>
+  </div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+<script>
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+btn.onclick=()=>{
+document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"))
+btn.classList.add("active")
+document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"))
+document.getElementById(btn.dataset.tab).classList.add("active")
+}
+})
+</script>
+<script>
+$(document).ready(function () {
+  const params = new URLSearchParams(window.location.search);
+  const activeTab = params.get("tab") || "summary"; // default to summary
+
+  // Switch tab button
+  $(".tab-btn").removeClass("active");
+  $(`.tab-btn[data-tab="${activeTab}"]`).addClass("active");
+
+  // Switch tab content
+  $(".tab-content").removeClass("active");
+  $(`#${activeTab}`).addClass("active");
+});
+</script>
+</body>
+</html>
