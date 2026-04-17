@@ -931,4 +931,16 @@ a:hover {
 .Rd_none{
   display: none;
 }
+.card{
+  overflow: auto;
+}
+.content .row {
+    margin-bottom: 0;
+}
+table thead tr th{
+text-wrap: nowrap;
+}
+.Card_HMax{
+  height: auto !important;
+}
 }
