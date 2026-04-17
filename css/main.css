@@ -178,7 +178,7 @@ body {
   border-right: 1px solid #eee;
   display: flex;
   flex-direction: column;
-  transition: 0.5s ease-in-out;
+  /*transition: 0.5s ease-in-out;*/
 }
 
 /* Logo */
@@ -872,13 +872,14 @@ a:hover {
 .br_10px{
   border-radius: 10px !important;
 }
- 
+ .hoverGrid a{
+color:#fff !important;
+ }
 
 
 /* responsive css */
 @media (max-width: 768px) {
   .header {
-    display: grid !important;
     height: auto !important;
   }
   .content{
@@ -888,24 +889,24 @@ a:hover {
     padding: 7px !important;
   }
   .dashboard-page .sidebar{
-    width: 195px;
-    transition: 0.5s ease-in-out;
+    width: 60px;
+   
   }
   .dashboard-page .main{
-    margin-left: 200px;
+    margin-left: 65px;
   }
   .dashboard-page .header {
-    margin-left: 217px;
+    margin-left: 60px;
   }
 
-  .dashboard-page .sidebar.collapsed {
-    width: 60px;
+  .dashboard-page .sidebar.mobile_collapsed {
+   width: 175px !important;
 }
-.dashboard-page .sidebar.collapsed ~ .header {
-    margin-left: 60px;
+.dashboard-page .sidebar.mobile_collapsed ~ .header {
+ margin-left: 175px;;
 }
-.dashboard-page .sidebar.collapsed ~ .main {
-    margin-left: 60px;
+.dashboard-page .sidebar.mobile_collapsed ~ .main {
+    margin-left: 175px;
 }
 .statsArea div{
   margin-bottom: 5px;
@@ -942,5 +943,25 @@ text-wrap: nowrap;
 }
 .Card_HMax{
   height: auto !important;
+}
+.dashboard-page .sidebar {
+    min-width: 60px;
+ 
+}
+ .dashboard-page .sidebar .text {
+    display: none !important;
+}
+.dashboard-page .sidebar.mobile_collapsed .text {
+   display: block !important;
+}
+.dashboard-page .menu a {
+ 
+    gap: 3px;
+ 
+    font-size: 12px;
+ 
+}
+.dashboard-page .sidebar.collapsed .menu a {
+    justify-content: left;
 }
 }
